@@ -35,13 +35,22 @@ Run a shell from within the cluster
 
     kubectl scale deployment hello --replicas=4
     
+    
+### 5 Rolling Update
+
+    kubectl set image deployment hello hello=abdennebi/hello:2.0.0
+    
 
 ### 6 Autoscale
 
-    exec tester-2937232101-vfkwm  -ti /bin/sh   
-    
-    
+    kubectl autocale deployment hello --max=10 --min=1 --cpu-percent=50
 
+    exec tester-2937232101-vfkwm  -ti /bin/sh
+       
+    while true; do wget -q -O- http://hello:8080/expensive; done
+    
+    kubectl get pod
+    
     kubectl get hpa
        
         
